@@ -120,29 +120,80 @@ npm start
 
 <div class="dense">
 
-# Step 1: Basic 💻
+# Let's start 🔥
 
-Create a GraphQL server which exposes an `add` function to compute the sum of two numbers.
+- `cd src/start-here`
+- This is will be the folder to make your code and complete the exercises. \
+And you could check if the default server is running with command:
 
-- Expose a GraphQL `POST /graphql` route
-- Listen on port 3000
-- Create a schema including an `add` Query accepting parameters `x` and `y`
-- Implement a resolver for the `add` query
-- Respond with the JSON object when invoked with `(x:5, y:3)`
+```bash
+npm start
+```
 
-```json
-{
-  "data": {
-    "add": 8
-  }
-}
+You should see something like:
+
+```bash
+[16:38:17.824] INFO (5384): Fastify server is running...
+[16:38:17.831] INFO (5384): Server listening at http://127.0.0.1:3000
 ```
 
 </div>
 
 ---
 
-# Step 1: Solution / 1
+<div class="dense">
+
+# Step 1: Basic 💻
+
+Write a GraphQL file to compute the sum of two numbers.
+
+- Create and expose a schema including an `add` Query accepting parameters `x` and `y`
+- Implement and expose a resolver for the `add` query
+- Respond with the JSON object when invoked with `(x:5, y:3)`
+
+https://graphql.org/learn/queries/#variables
+
+</div>
+
+---
+
+# Step 1: Solution 1
+
+```js
+// graphql.js
+const schema = `
+  type Query {
+    add(x: Int!, y: Int!): Int
+  }
+`
+
+const resolvers = {
+  Query: {
+    add: async (_, { x, y }) => x + y
+  }
+}
+
+export { schema, resolvers }
+```
+
+---
+
+<div class="dense">
+
+# Step 1: Basic 💻
+
+Register mecurious plugin and query created
+
+- Expose a GraphQL `POST /graphql` route
+- Listen on port 3000
+
+https://github.com/mercurius-js/mercurius#quick-start
+
+</div>
+
+---
+
+# Step 1: Solution / 2
 
 ```js
 // index.js
@@ -171,24 +222,7 @@ export default function buildServer() {
 
 ---
 
-# Step 1: Solution / 2
-
-```js
-// graphql.js
-const schema = `
-  type Query {
-    add(x: Int!, y: Int!): Int
-  }
-`
-
-const resolvers = {
-  Query: {
-    add: async (_, { x, y }) => x + y
-  }
-}
-
-export { schema, resolvers }
-```
+# Step 1: Solution / 3
 
 ```js
 // server.js
