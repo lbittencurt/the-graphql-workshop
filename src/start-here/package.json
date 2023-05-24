@@ -1,0 +1,9 @@
+{
+  "name": "start-here",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo 'todo'"
+  }
+}
